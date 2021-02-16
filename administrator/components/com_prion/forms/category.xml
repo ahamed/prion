@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<form>
+	<fieldset addfieldprefix="Joomla\Component\Content\Administrator\Field">
+		<field
+			name="title"
+			label="COM_PRION_CATEGORY_TITLE"
+			description="COM_PRION_GLOBAL_TITLE_DESC"
+		/>
+		<field
+			name="alias"
+			label="COM_PRION_CATEGORY_ALIAS"
+			description="COM_PRION_GLOBAL_ALIAS_DESC"
+		/>
+	</fieldset>
+
+</form>

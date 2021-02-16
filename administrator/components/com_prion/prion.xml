@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension type="component" method="upgrade">
+	<name>com_prion</name>
+	<author>Sajeeb Ahamed</author>
+	<creationDate>February 2021</creationDate>
+	<copyright>(C) Sajeeb Ahamed.</copyright>
+	<license>GNU General Public License version 2 or later; see LICENSE.txt</license>
+	<authorEmail>dark07web@gmail.com</authorEmail>
+	<authorUrl>https://ahamed.github.io</authorUrl>
+	<version>1.0.0</version>
+	<description>COM_PRION_XML_DESCRIPTION</description>
+	<namespace path="src">Joomla\Component\Prion</namespace>
+	<files folder="site">
+		<folder>forms</folder>
+		<folder>helpers</folder>
+		<folder>src</folder>
+		<folder>tmpl</folder>
+	</files>
+	<languages folder="site">
+		<language tag="en-GB">language/en-GB/com_prion.ini</language>
+	</languages>
+	<media destination="com_prion" folder="media">
+		<folder>js</folder>
+	</media>
+	<administration>
+		<files folder="admin">
+			<filename>access.xml</filename>
+			<filename>config.xml</filename>
+			<filename>prion.xml</filename>
+			<folder>forms</folder>
+			<folder>helpers</folder>
+			<folder>services</folder>
+			<folder>sql</folder>
+			<folder>src</folder>
+			<folder>tmpl</folder>
+		</files>
+		<languages folder="admin">
+			<language tag="en-GB">language/en-GB/com_prion.ini</language>
+			<language tag="en-GB">language/en-GB/com_prion.sys.ini</language>
+		</languages>
+	</administration>
+	<dashboards>
+		<dashboard title="COM_PRION_DASHBOARD_TITLE" icon="icon-file-alt">prion</dashboard>
+	</dashboards>
+</extension>

@@ -10,6 +10,11 @@
 	<version>1.0.0</version>
 	<description>COM_PRION_XML_DESCRIPTION</description>
 	<namespace path="src">Joomla\Component\Prion</namespace>
+	<install> <!-- Runs on install -->
+		<sql>
+			<file driver="mysql" charset="utf8">sql/install.mysql.utf8.sql</file>
+		</sql>
+	</install>
 	<files folder="site">
 		<folder>forms</folder>
 		<folder>helpers</folder>
@@ -23,6 +28,15 @@
 		<folder>js</folder>
 	</media>
 	<administration>
+		<menu>COM_PRION</menu>
+		<submenu>
+			<!--
+				Note that all & must be escaped to &amp; for the file to be valid
+				XML and be parsed by the installer
+			-->
+			<menu link="option=com_prion"
+				view="categories" img="class:contact-cat" alt="Contacts/Categories">COM_PRION_CATEGORIES</menu>
+		</submenu>
 		<files folder="admin">
 			<filename>access.xml</filename>
 			<filename>config.xml</filename>

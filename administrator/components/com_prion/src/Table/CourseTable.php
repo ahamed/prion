@@ -15,21 +15,21 @@ use Joomla\CMS\Table\Table;
 use Joomla\Database\DatabaseDriver;
 
 /**
- * Category Table class.
+ * Course Table class.
  *
- * @since  1.6
+ * @since  1.0.0
  */
-class CategoryTable extends Table
+class CourseTable extends Table
 {
 	/**
 	 * Constructor
 	 *
 	 * @param   DatabaseDriver  $db  Database connector object
 	 *
-	 * @since   1.6
+	 * @since   1.0.0
 	 */
 	public function __construct(DatabaseDriver $db)
 	{
-		parent::__construct('#__prion_categories', 'id', $db);
+		parent::__construct('#__prion_courses', 'id', $db);
 	}
 }

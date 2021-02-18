@@ -12,26 +12,22 @@ namespace Joomla\Component\Prion\Administrator\Extension;
 
 \defined('JPATH_PLATFORM') or die;
 
-
-use Joomla\CMS\Component\Router\RouterServiceInterface;
-use Joomla\CMS\Component\Router\RouterServiceTrait;
 use Joomla\CMS\Extension\BootableExtensionInterface;
 use Joomla\CMS\Extension\MVCComponent;
+use Joomla\CMS\Factory;
+use Joomla\CMS\Fields\FieldsServiceInterface;
 use Joomla\CMS\Form\Form;
 use Joomla\CMS\HTML\HTMLRegistryAwareTrait;
-use Joomla\Component\Prion\Administrator\Helper\PrionHelper;
+use Joomla\CMS\Language\Text;
 use Psr\Container\ContainerInterface;
-
-
 /**
  * Component class for com_prion
  *
  * @since  1.0.0
  */
 class PrionComponent extends MVCComponent implements
-	BootableExtensionInterface, RouterServiceInterface
+	BootableExtensionInterface, FieldsServiceInterface
 {
-	use RouterServiceTrait;
 	use HTMLRegistryAwareTrait;
 
 	/**
@@ -44,28 +40,45 @@ class PrionComponent extends MVCComponent implements
 	 * @param   ContainerInterface  $container  The container
 	 *
 	 * @return  void
-	 *
 	 * @since   1.0.0
 	 */
 	public function boot(ContainerInterface $container)
 	{
-		// $this->getRegistry()->register('contentadministrator', new AdministratorService);
-		// $this->getRegistry()->register('contenticon', new Icon($container->get(SiteApplication::class)));
-
-		// The layout joomla.content.icons does need a general icon service
-		// $this->getRegistry()->register('icon', $this->getRegistry()->getService('contenticon'));
+		// Registering your services at the booting of the extension.
 	}
 
 	/**
-	 * Prepares the category form
+	 * Returns a valid section for the given section. If it is not valid then null
+	 * is returned.
 	 *
-	 * @param   Form          $form  The form to prepare
-	 * @param   array|object  $data  The form data
+	 * @param   string  $section  The section to get the mapping for
+	 * @param   object  $item     The item
 	 *
-	 * @return void
+	 * @return  string|null  The new section
+	 *
+	 * @since   4.0.0
 	 */
-	public function prepareForm(Form $form, $data)
+	public function validateSection($section, $item = null)
 	{
-		PrionHelper::onPrepareForm($form, $data);
+		return $section;
+	}
+
+	/**
+	 * Returns valid contexts
+	 *
+	 * @return  array
+	 *
+	 * @since   4.0.0
+	 */
+	public function getContexts(): array
+	{
+		Factory::getLanguage()->load('com_prion', JPATH_ADMINISTRATOR);
+
+		$contexts = array(
+			'com_prion.courses'    => Text::_('COM_CONTACT_FIELDS_CONTEXT_CONTACT'),
+			'com_prion.course'       => Text::_('COM_CONTACT_FIELDS_CONTEXT_MAIL'),
+		);
+
+		return $contexts;
 	}
 }

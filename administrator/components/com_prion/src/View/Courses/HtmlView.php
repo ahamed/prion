@@ -7,7 +7,7 @@
  * @license     GNU General Public License version 2 or later; see LICENSE.txt
  */
 
-namespace Joomla\Component\Prion\Administrator\View\Categories;
+namespace Joomla\Component\Prion\Administrator\View\Courses;
 
 \defined('_JEXEC') or die;
 
@@ -67,8 +67,11 @@ class HtmlView extends BaseHtmlView
 		$this->filterForm    = $this->get('FilterForm');
 		$this->activeFilters = $this->get('ActiveFilters');
 
+		$errors = $this->get('Errors');
+		
+		
 		// Check for errors.
-		if ((count($errors = $this->get('Errors'))) || $this->transitions === false)
+		if (count($errors = $this->get('Errors')))
 		{
 			throw new GenericDataException(implode("\n", $errors), 500);
 		}

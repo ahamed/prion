@@ -13,7 +13,7 @@ namespace Joomla\Component\Prion\Administrator\Controller;
 use Joomla\CMS\MVC\Controller\AdminController;
 use Joomla\CMS\MVC\Factory\MVCFactoryInterface;
 
-\defined('JEXEC') or die;
+\defined('_JEXEC') or die('Restricted Direct Access!');
 
 class CoursesController extends AdminController
 {
@@ -45,7 +45,7 @@ class CoursesController extends AdminController
 	 *
 	 * @since   1.6
 	 */
-	public function getModel($name = 'Category', $prefix = 'Administrator', $config = array('ignore_request' => true))
+	public function getModel($name = 'Course', $prefix = 'Administrator', $config = array('ignore_request' => true))
 	{
 		return parent::getModel($name, $prefix, $config);
 	}

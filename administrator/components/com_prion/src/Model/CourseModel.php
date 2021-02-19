@@ -10,7 +10,7 @@
 
 namespace Joomla\Component\Prion\Administrator\Model;
 
-\defined('JEXEC') or die;
+\defined('_JEXEC') or die('Restricted Direct Access!');
 
 use Joomla\CMS\Factory;
 use Joomla\CMS\Form\Form;
@@ -36,6 +36,7 @@ class CourseModel extends AdminModel
 	 * Name of the form
 	 *
 	 * @var string
+	 *
 	 * @since  1.0.0
 	 */
 	protected $formName = 'course';
@@ -46,6 +47,7 @@ class CourseModel extends AdminModel
 	 * @param   object  $record  A record object.
 	 *
 	 * @return  boolean  True if allowed to delete the record. Defaults to the permission set in the component.
+	 *
 	 * @since   1.0.0
 	 */
 	protected function canDelete($record)
@@ -64,12 +66,13 @@ class CourseModel extends AdminModel
 	 * @param   object  $record  A record object.
 	 *
 	 * @return  boolean  True if allowed to change the state of the record. Defaults to the permission set in the component.
+	 *
 	 * @since   1.0.0
 	 */
 	protected function canEditState($record)
 	{
 		// Check against the category.
-		if (!empty($record->catid))
+		if (!empty($record->id))
 		{
 			return Factory::getApplication()->getIdentity()->authorise('core.edit.state', 'com_prion.course.' . (int) $record->id);
 		}
@@ -79,12 +82,33 @@ class CourseModel extends AdminModel
 	}
 
 	/**
+	 * Method to check if you can save a record.
+	 *
+	 * @param   array   $data  An array of input data.
+	 * @param   string  $key   The name of the key for the primary key.
+	 *
+	 * @return  boolean
+	 *
+	 * @since   1.0.0
+	 */
+	protected function canSave($data = array(), $key = 'id')
+	{
+		if (empty($data[$key]))
+		{
+			return false;
+		}
+
+		return Factory::getApplication()->getIdentity()->authorise('core.edit', 'com_prion.course.' . $data[$key]);
+	}
+
+	/**
 	 * Method to get the row form.
 	 *
 	 * @param   array    $data      Data for the form.
 	 * @param   boolean  $loadData  True if the form is to load its own data (default case), false if not.
 	 *
 	 * @return  Form|boolean  A Form object on success, false on failure
+	 *
 	 * @since   1.0.0
 	 */
 	public function getForm($data = array(), $loadData = true)
@@ -104,6 +128,7 @@ class CourseModel extends AdminModel
 	 * Method to get the data that should be injected in the form.
 	 *
 	 * @return  mixed  The data for the form.
+	 *
 	 * @since   1.0.0
 	 */
 	protected function loadFormData()
@@ -135,6 +160,7 @@ class CourseModel extends AdminModel
 	 * @param   array  $data  The form data.
 	 *
 	 * @return  boolean  True on success.
+	 *
 	 * @since   1.0.0
 	 */
 	public function save($data)
@@ -165,6 +191,22 @@ class CourseModel extends AdminModel
 		}
 
 		return parent::save($data);
+	}
+
+	/**
+	 * Method to change the published state of one or more records.
+	 * Your can perform your own logic before publish/unpublish the record item.
+	 *
+	 * @param   array    $pks    A list of the primary keys to change.
+	 * @param   integer  $value  The value of the published state.
+	 *
+	 * @return  boolean  True on success.
+	 *
+	 * @since   1.0.0
+	 */
+	public function publish(&$pks, $value = 1)
+	{
+		return parent::publish($pks, $value);
 	}
 
 	/**
@@ -200,7 +242,7 @@ class CourseModel extends AdminModel
 	 *
 	 * @return  void
 	 *
-	 * @since   1.6
+	 * @since   1.0.0
 	 */
 	protected function prepareTable($table)
 	{
@@ -213,7 +255,7 @@ class CourseModel extends AdminModel
 	 *
 	 * @return  array  An array of conditions to add to ordering queries.
 	 *
-	 * @since   1.6
+	 * @since   1.0.0
 	 */
 	protected function getReorderConditions($table)
 	{
@@ -229,7 +271,7 @@ class CourseModel extends AdminModel
 	 *
 	 * @return  void
 	 *
-	 * @since   3.0.3
+	 * @since   1.0.0
 	 */
 	protected function preprocessForm(Form $form, $data, $group = 'prion')
 	{
@@ -243,7 +285,7 @@ class CourseModel extends AdminModel
 	 *
 	 * @return  mixed  Object on success, false on failure.
 	 *
-	 * @since   1.6
+	 * @since   1.0.0
 	 */
 	public function getItem($pk = null)
 	{

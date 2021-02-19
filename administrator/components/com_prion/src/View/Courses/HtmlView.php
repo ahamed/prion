@@ -11,8 +11,13 @@ namespace Joomla\Component\Prion\Administrator\View\Courses;
 
 \defined('_JEXEC') or die;
 
+use Joomla\CMS\Factory;
+use Joomla\CMS\Language\Text;
 use Joomla\CMS\MVC\View\GenericDataException;
 use Joomla\CMS\MVC\View\HtmlView as BaseHtmlView;
+use Joomla\CMS\Toolbar\Toolbar;
+use Joomla\CMS\Toolbar\ToolbarHelper;
+use Joomla\Component\Prion\Administrator\Helper\PrionHelper;
 
 
 class HtmlView extends BaseHtmlView
@@ -76,6 +81,72 @@ class HtmlView extends BaseHtmlView
 			throw new GenericDataException(implode("\n", $errors), 500);
 		}
 
+		$this->addToolbar();
+
 		return parent::display($tpl);
+	}
+
+	/**
+	 * Add the page title and toolbar.
+	 *
+	 * @return  void
+	 *
+	 * @since   1.0.0
+	 */
+	protected function addToolbar()
+	{
+		$canDo = PrionHelper::getActions('com_contact', 'category', $this->state->get('filter.category_id'));
+		$user  = Factory::getApplication()->getIdentity();
+
+		// Get the toolbar object instance
+		$toolbar = Toolbar::getInstance('toolbar');
+
+		ToolbarHelper::title(Text::_('COM_CORSES_TOOLBAR_LABEL'), 'book prion-course');
+
+		if ($canDo->get('core.create'))
+		{
+			$toolbar->addNew('course.add');
+		}
+
+		if ($canDo->get('core.edit.state'))
+		{
+			$dropdown = $toolbar->dropdownButton('status-group')
+				->text('JTOOLBAR_CHANGE_STATUS')
+				->toggleSplit(false)
+				->icon('icon-ellipsis-h')
+				->buttonClass('btn btn-action')
+				->listCheck(true);
+
+			$childBar = $dropdown->getChildToolbar();
+
+			$childBar->publish('courses.publish')->listCheck(true);
+
+			$childBar->unpublish('courses.unpublish')->listCheck(true);
+
+			$childBar->archive('courses.archive')->listCheck(true);
+
+			if ($user->authorise('core.admin'))
+			{
+				$childBar->checkin('courses.checkin')->listCheck(true);
+			}
+
+			if ($this->state->get('filter.published') !== -2)
+			{
+				$childBar->trash('courses.trash')->listCheck(true);
+			}
+
+			if ($this->state->get('filter.published') === -2 && $canDo->get('core.delete'))
+			{
+				$childBar->delete('courses.delete')
+					->text('JTOOLBAR_EMPTY_TRASH')
+					->message('JGLOBAL_CONFIRM_DELETE')
+					->listCheck(true);
+			}
+		}
+
+		if ($user->authorise('core.admin', 'com_prion') || $user->authorise('core.options', 'com_courses'))
+		{
+			$toolbar->preferences('com_prion');
+		}
 	}
 }

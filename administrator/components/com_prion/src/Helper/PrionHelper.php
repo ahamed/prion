@@ -11,20 +11,10 @@
 namespace Joomla\Component\Prion\Administrator\Helper;
 
 use Joomla\CMS\Form\Form;
+use Joomla\CMS\Helper\ContentHelper;
 
 \defined('JPATH_PLATFORM') or die;
 
-class PrionHelper
+class PrionHelper extends ContentHelper
 {
-	/**
-	 * Prepares a form
-	 *
-	 * @param   Form          $form  The form to change
-	 * @param   array|object  $data  The form data
-	 *
-	 * @return void
-	 */
-	public static function onPrepareForm(Form $form, $data)
-	{
-	}
 }

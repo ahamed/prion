@@ -41,7 +41,7 @@
 				XML and be parsed by the installer
 			-->
 			<menu link="option=com_prion"
-				view="categories" img="class:contact-cat" alt="Contacts/Categories">COM_PRION_CATEGORIES</menu>
+				view="courses" img="class:contact-cat" alt="Prion/Courses">COM_PRION_COURSES</menu>
 		</submenu>
 		<files folder="admin">
 			<filename>access.xml</filename>

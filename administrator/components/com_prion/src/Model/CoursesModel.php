@@ -28,6 +28,7 @@ class CoursesModel extends ListModel
 	 * @param   array  $config  An optional associative array of configuration settings.
 	 *
 	 * @see     \JControllerLegacy
+	 *
 	 * @since   1.0.0
 	 */
 	public function __construct($config = [])
@@ -62,7 +63,7 @@ class CoursesModel extends ListModel
 	 *
 	 * @return  void
 	 *
-	 * @since   1.6
+	 * @since   1.0.0
 	 */
 	protected function populateState($ordering = 'a.title', $direction = 'asc')
 	{
@@ -103,7 +104,7 @@ class CoursesModel extends ListModel
 	 *
 	 * @return  string  A store id.
 	 *
-	 * @since   1.6
+	 * @since   1.0.0
 	 */
 	protected function getStoreId($id = '')
 	{
@@ -123,7 +124,7 @@ class CoursesModel extends ListModel
 	 *
 	 * @return  \JDatabaseQuery
 	 *
-	 * @since   1.6
+	 * @since   1.0.0
 	 */
 	protected function getListQuery()
 	{
@@ -139,7 +140,8 @@ class CoursesModel extends ListModel
 					', ',
 					$this->getState(
 						'list.select',
-						'a.id, a.title, a.alias, a.published, a.access, a.created, a.created_by, a.ordering, a.language'
+						'a.id, a.title, a.alias, a.published, a.access, a.created, a.created_by, a.ordering, a.language, ' .
+						'a.checked_out, a.checked_out_time'
 					)
 				)
 			)

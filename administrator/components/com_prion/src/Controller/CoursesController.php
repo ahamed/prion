@@ -15,6 +15,11 @@ use Joomla\CMS\MVC\Factory\MVCFactoryInterface;
 
 \defined('_JEXEC') or die('Restricted Direct Access!');
 
+/**
+ * Controller class for the courses view, extends AdminController.
+ *
+ * @since	1.0.0
+ */
 class CoursesController extends AdminController
 {
 	/**
@@ -27,7 +32,7 @@ class CoursesController extends AdminController
 	 * @param   CMSApplication       $app      The JApplication for the dispatcher
 	 * @param   Input                $input    Input
 	 *
-	 * @since   3.0
+	 * @since   1.0.0
 	 */
 	public function __construct($config = array(), MVCFactoryInterface $factory = null, $app = null, $input = null)
 	{
@@ -43,7 +48,7 @@ class CoursesController extends AdminController
 	 *
 	 * @return  \Joomla\CMS\MVC\Model\BaseDatabaseModel
 	 *
-	 * @since   1.6
+	 * @since   1.0.0
 	 */
 	public function getModel($name = 'Course', $prefix = 'Administrator', $config = array('ignore_request' => true))
 	{

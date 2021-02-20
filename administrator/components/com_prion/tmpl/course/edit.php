@@ -44,6 +44,21 @@ $tmpl    = $isModal || $input->get('tmpl', '', 'cmd') === 'component' ? '&tmpl=c
 						The form fields could be rendered here.
 						Your can render field by using - <br />
 						<code>&lt;?php echo $this->form->renderField('fieldName'); ?&gt;</code>
+						<?php
+							$icons = ['wifi', 'cog', 'times', 'stop', 'spinner', 'stop', 'smiley-2',
+							'smiley-happy-2',
+							'smiley-happy',
+							'smiley-neutral-2',
+							'smiley-neutral',
+							'smiley-sad-2',
+							'smiley-sad',
+							'smiley'];
+						?>
+						<div class="d-flex justify-content-between">
+							<?php foreach ($icons as $icon): ?>
+								<?php echo HTMLHelper::_('icon.render', $icon); ?>
+							<?php endforeach ?>
+						</div>
 					</div>
 				</div>
 			</div>

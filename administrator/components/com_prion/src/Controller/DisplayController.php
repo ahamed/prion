@@ -37,6 +37,7 @@ class DisplayController extends BaseController
 	 * @param   array    $urlparams  An array of safe URL parameters and their variable types, for valid values see {@link JFilterInput::clean()}.
 	 *
 	 * @return  BaseController|boolean  This object to support chaining.
+	 *
 	 * @since   1.0.0
 	 */
 	public function display($cachable = false, $urlparams = [])

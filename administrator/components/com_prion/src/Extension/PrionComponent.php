@@ -19,14 +19,14 @@ use Joomla\CMS\Fields\FieldsServiceInterface;
 use Joomla\CMS\Form\Form;
 use Joomla\CMS\HTML\HTMLRegistryAwareTrait;
 use Joomla\CMS\Language\Text;
+use Joomla\Component\Prion\Administrator\Service\HTML\Icon;
 use Psr\Container\ContainerInterface;
 /**
  * Component class for com_prion
  *
  * @since  1.0.0
  */
-class PrionComponent extends MVCComponent implements
-	BootableExtensionInterface, FieldsServiceInterface
+class PrionComponent extends MVCComponent implements BootableExtensionInterface, FieldsServiceInterface
 {
 	use HTMLRegistryAwareTrait;
 
@@ -40,11 +40,13 @@ class PrionComponent extends MVCComponent implements
 	 * @param   ContainerInterface  $container  The container
 	 *
 	 * @return  void
+	 *
 	 * @since   1.0.0
 	 */
 	public function boot(ContainerInterface $container)
 	{
-		// Registering your services at the booting of the extension.
+		// Registering your HTML services at the booting time of the extension.
+		$this->getRegistry()->register('icon', new Icon);
 	}
 
 	/**

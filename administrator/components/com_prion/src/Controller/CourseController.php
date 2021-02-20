@@ -17,10 +17,15 @@ use Joomla\Utilities\ArrayHelper;
 
 \defined('_JEXEC') or die('Restricted Direct Access!');
 
+/**
+ * Controller class for the course view extends FormController
+ *
+ * @since	1.0.0
+ */
 class CourseController extends FormController
 {
 	/**
-	 * Constructor.
+	 * Constructor function of the CourseController.
 	 *
 	 * @param   array                $config   An optional associative array of configuration settings.
 	 * Recognized key values include 'name', 'default_task', 'model_path', and
